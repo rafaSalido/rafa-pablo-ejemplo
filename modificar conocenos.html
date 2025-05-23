@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Conócenos - Innova-Dent</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, #FFB380, #FFDAB3);
+            padding: 10px 20px;
+            height: 80px;
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        .logout-button {
+            margin-left: auto;
+            text-decoration: none;
+            color: black;
+            padding: 10px 15px;
+            background-color: #FFB380;
+            border-radius: 4px;
+        }
+
+        .logout-button:hover {
+            background-color: #FF9F55;
+        }
+
+        .form-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #FFB380;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .save-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #FF9F55;
+            border: 1px solid #000;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px;
+            background-color: #FFB380;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Innova-Dent Logo">
+            </a>
+        </div>
+        <a href="#" class="logout-button" onclick="logout()">Cerrar sesión</a>
+    </nav>
+
+    <div class="form-container">
+        <form onsubmit="event.preventDefault(); guardarCambios();">
+            <div class="form-group">
+                <label for="informacion">Editar Información</label>
+                <textarea id="informacion" name="informacion" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="videoUrl">Cambiar Video (URL)</label>
+                <input type="url" id="videoUrl" name="videoUrl" required>
+            </div>
+
+            <button type="submit" class="save-button">Guardar</button>
+        </form>
+    </div>
+
+    <a href="modificar contenido.html" class="back-button">←</a>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('usuarioActual');
+            window.location.href = 'login.html';
+        }
+
+        function guardarCambios() {
+            const informacion = document.getElementById('informacion').value;
+            const videoUrl = document.getElementById('videoUrl').value;
+            
+            // Guardar en localStorage
+            localStorage.setItem('conocenosInfo', informacion);
+            localStorage.setItem('conocenosVideo', videoUrl);
+            
+            alert('Cambios guardados correctamente');
+            window.location.href = 'modificar contenido.html';
+        }
+
+        // Cargar información existente si la hay
+        window.onload = function() {
+            const informacionGuardada = localStorage.getItem('conocenosInfo');
+            const videoUrlGuardada = localStorage.getItem('conocenosVideo');
+            
+            // Si no hay información guardada, cargar el contenido por defecto
+            if (!informacionGuardada) {
+                const contenidoPorDefecto = `
+                    <p>Fundada el 18 de octubre de 2005, Innova-Dent ha sido sinónimo de excelencia y
+                    compromiso con la salud bucodental de nuestra comunidad...</p>
+                    
+                    <p>A lo largo de los años, hemos evolucionado constantemente...</p>
+
+                    <p>¡En Innova-Dent, cuidamos de cada sonrisa como si fuera única!</p>
+                `;
+                document.getElementById('informacion').value = contenidoPorDefecto;
+            } else {
+                document.getElementById('informacion').value = informacionGuardada;
+            }
+            
+            if (videoUrlGuardada) {
+                document.getElementById('videoUrl').value = videoUrlGuardada;
+            }
+        }
+    </script>
+</body>
+
+</html>

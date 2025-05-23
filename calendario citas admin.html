@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Citas - Innova-Dent</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, #FFB380, #FFDAB3);
+            padding: 10px 20px;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 80px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 0;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: black;
+            padding: 15px 25px;
+            font-weight: normal;
+            background-color: #FFB380;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #FF9F55;
+        }
+
+        .nav-buttons a.active {
+            background-color: #FF9F55;
+        }
+
+        .user-section {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        .logout-button {
+            text-decoration: none;
+            color: black;
+            padding: 10px 15px;
+        }
+
+        .main-content {
+            padding: 20px 40px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .calendar {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid black;
+        }
+
+        .calendar th {
+            background-color: black;
+            color: white;
+            padding: 8px;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        .calendar td {
+            border: 1px solid black;
+            padding: 15px;
+            text-align: center;
+            vertical-align: middle;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        .calendar td.disabled {
+            background-color: #f0f0f0;
+        }
+
+        .calendar td.red {
+            background-color: #FF9F55;
+            color: black;
+        }
+
+        .calendar td.green {
+            background-color: #FFB380;
+            color: black;
+        }
+
+        .mark-buttons {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        .mark-button {
+            padding: 5px 10px;
+            margin: 2px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mark-red {
+            background-color: #FF9F55;
+            color: black;
+        }
+
+        .mark-green {
+            background-color: #FFB380;
+            color: black;
+        }
+
+        .mark-none {
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Innova-Dent">
+        </div>
+        <div class="nav-buttons">
+            <a href="perfil administrador.html">Perfil</a>
+            <a href="modificar contenido.html">Editar Contenido</a>
+            <a href="calendario citas admin.html" class="active">Calendario de citas</a>
+        </div>
+        <div class="user-section">
+            <div class="profile-icon"></div>
+            <a href="#" class="logout-button" onclick="logout()">Cerrar sesión</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1>Calendario de citas</h1>
+        
+        <table class="calendar">
+            <thead>
+                <tr>
+                    <th>LUNES</th>
+                    <th>MARTES</th>
+                    <th>MIÉRCOLES</th>
+                    <th>JUEVES</th>
+                    <th>VIERNES</th>
+                    <th>SÁBADO</th>
+                    <th>DOMINGO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td>30</td>
+                    <td>31</td>
+                    <td class="disabled"></td>
+                    <td class="disabled"></td>
+                    <td class="disabled"></td>
+                    <td class="disabled"></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <div id="markButtons" class="mark-buttons">
+        <button class="mark-button mark-red">Marcar naranja</button>
+        <button class="mark-button mark-green">Marcar naranja claro</button>
+        <button class="mark-button mark-none">Quitar marca</button>
+    </div>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('usuarioActual');
+            window.location.href = 'login.html';
+        }
+
+        let selectedCell = null;
+        const markButtons = document.getElementById('markButtons');
+        
+        // Cargar días marcados al iniciar
+        window.onload = function() {
+            const markedDays = JSON.parse(localStorage.getItem('markedDays') || '{}');
+            const cells = document.querySelectorAll('.calendar td');
+            cells.forEach(cell => {
+                const day = cell.textContent;
+                if (markedDays[day]) {
+                    cell.classList.add(markedDays[day]);
+                }
+            });
+        }
+
+        document.querySelector('.calendar').addEventListener('click', function(e) {
+            if (e.target.tagName === 'TD' && !e.target.classList.contains('disabled')) {
+                selectedCell = e.target;
+                
+                // Posicionar y mostrar los botones
+                markButtons.style.display = 'block';
+                markButtons.style.left = e.pageX + 'px';
+                markButtons.style.top = e.pageY + 'px';
+            }
+        });
+
+        document.querySelectorAll('.mark-button').forEach(button => {
+            button.addEventListener('click', function() {
+                if (selectedCell) {
+                    // Remover clases existentes
+                    selectedCell.classList.remove('red', 'green');
+                    
+                    // Añadir nueva clase según el botón
+                    if (this.classList.contains('mark-red')) {
+                        selectedCell.classList.add('red');
+                    } else if (this.classList.contains('mark-green')) {
+                        selectedCell.classList.add('green');
+                    }
+                    
+                    // Guardar en localStorage
+                    const markedDays = {};
+                    document.querySelectorAll('.calendar td').forEach(cell => {
+                        if (cell.classList.contains('red')) {
+                            markedDays[cell.textContent] = 'red';
+                        } else if (cell.classList.contains('green')) {
+                            markedDays[cell.textContent] = 'green';
+                        }
+                    });
+                    localStorage.setItem('markedDays', JSON.stringify(markedDays));
+                }
+                markButtons.style.display = 'none';
+            });
+        });
+
+        // Ocultar botones al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.mark-buttons') && !e.target.closest('.calendar')) {
+                markButtons.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

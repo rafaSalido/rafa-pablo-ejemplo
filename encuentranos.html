@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="find-us-title">¡Encuéntranos! - Innova-Dent</title>
+    <link rel="stylesheet" href="css/encuentranos.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="images/logo.png" alt="Innova-Dent Logo"></a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="conocenos.html" data-translate="about">¡Conócenos!</a></li>
+                    <li><a href="citas.html" data-translate="appointments">Citas</a></li>
+                    <li>
+                        <a href="tratamientos.html" class="dropdown-toggle" data-translate="treatments">Tratamientos</a>
+                        <ul class="dropdown">
+                            <li><a href="paginaOdontologia.html" data-translate="general-dentistry">Odontología general</a></li>
+                            <li><a href="paginaOrtodoncia.html" data-translate="orthodontics">Ortodoncia</a></li>
+                            <li><a href="paginaCirugia.html" data-translate="surgery">Cirugía</a></li>
+                            <li><a href="paginaEndodoncia.html" data-translate="endodontics">Endodoncia</a></li>
+                            <li><a href="paginaEstetica.html" data-translate="aesthetics">Estética</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="encuentranos.html" data-translate="find-us">¡Encuéntranos!</a></li>
+                    <li><a href="profesionales.html" data-translate="our-professionals">Nuestros Profesionales</a></li>
+                    <li><a href="blog.html" data-translate="blog">Blog</a></li>
+                    <li><a href="financiacion.html" data-translate="financing">Financiación</a></li>
+                    <li><a href="login.html" data-translate="login">Login</a></li>
+                </ul>
+            </div>
+            <div class="nav-buttons">
+                <button class="language-button" onclick="toggleLanguage()">
+                    <span id="languageText">EN</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="encuentranos" style="text-align: center;">
+            <h1 data-translate="find-us">¡Encuéntranos!</h1>
+            <div class="contact-info" style="display: inline-block; text-align: left;">
+                <p><span data-translate="phone">Número de teléfono</span>: <strong id="telefonoDisplay">+34 636 34 91 59</strong></p>
+                <p><span data-translate="address">Dirección</span>: <strong id="direccionDisplay">C/ Agua Nº31 Bajo B</strong></p>
+                <p><span data-translate="city">Población</span>: <strong id="poblacionDisplay">Berja</strong></p>
+            </div>
+            <div class="local-photo">
+                <h2 data-translate="local-photo">Foto local</h2>
+                <img src="images/foto-local.png" alt="Foto local" class="local-photo-img" id="fotoLocalDisplay">
+            </div>
+            <div class="map">
+                <h2 data-translate="location">Ubicación</h2>
+                <div id="mapaContainer">
+                    <iframe 
+                        id="mapaFrame"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3192.8252183144955!2d-2.950943088893456!3d36.84666177211816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd7048bb46f73ed3%3A0xd4fd58e02ed548d8!2sINNOVA-DENT!5e0!3m2!1ses!2ses!4v1733755348672!5m2!1ses!2ses" 
+                        width="600" 
+                        height="450" 
+                        class="google-map" 
+                        frameborder="0" 
+                        style="border:0;" 
+                        allowfullscreen 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Innova-Dent">
+            </div>
+            <div class="footer-info">
+                <div class="contact-info">
+                    <h2 data-translate="clinic-name">CLÍNICA DENTAL BERJA</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <img src="images/location-icon.png" alt="Ubicación">
+                            <span data-translate="address">C/ Agua Nº31 Bajo B</span>
+                        </div>
+                        <div class="contact-item">
+                            <img src="images/phone-icon.png" alt="Teléfono">
+                            <span>+34 636 34 91 59</span>
+                        </div>
+                        <div class="contact-item">
+                            <img src="images/email-icon.png" alt="Email">
+                            <span>innovadentberja@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-media">
+                    <a href="#"><img src="images/whatsapp-icon.png" alt="WhatsApp" class="whatsapp"></a>
+                    <img src="images/instagram-icon.png" alt="Instagram">
+                    <a href="#"><img src="images/facebook-icon.png" alt="Facebook" class="facebook"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome para iconos -->
+    <script src="https://kit.fontawesome.com/tu-codigo.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/carousel.js"></script>
+    <script>
+        window.onload = function() {
+            // Cargar datos del localStorage
+            const telefono = localStorage.getItem('encuentranosTelefono');
+            const direccion = localStorage.getItem('encuentranosDireccion');
+            const poblacion = localStorage.getItem('encuentranosPoblacion');
+            const mapaUrl = localStorage.getItem('encuentranosMapaUrl');
+            const fotoLocal = localStorage.getItem('encuentranosFotoLocal');
+
+            // Actualizar elementos en la página
+            if (telefono) document.getElementById('telefonoDisplay').textContent = telefono;
+            if (direccion) document.getElementById('direccionDisplay').textContent = direccion;
+            if (poblacion) document.getElementById('poblacionDisplay').textContent = poblacion;
+            if (mapaUrl) document.getElementById('mapaFrame').src = mapaUrl;
+            if (fotoLocal) document.getElementById('fotoLocalDisplay').src = fotoLocal;
+
+            // Actualizar también el footer
+            const footerTelefono = document.querySelector('.contact-details .contact-item:nth-child(2) span');
+            const footerDireccion = document.querySelector('.contact-details .contact-item:nth-child(1) span');
+            
+            if (telefono) footerTelefono.textContent = telefono;
+            if (direccion) footerDireccion.textContent = direccion;
+        };
+    </script>
+</body>
+
+</html>

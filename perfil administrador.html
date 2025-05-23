@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Innova-Dent</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, #FFB380, #FFDAB3);
+            padding: 10px 20px;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 80px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 0;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: black;
+            padding: 15px 25px;
+            font-weight: normal;
+            background-color: #FFB380;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #FF9F55;
+        }
+
+        .nav-buttons a.active {
+            background-color: #FF9F55;
+        }
+
+        .user-section {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        .logout-button {
+            text-decoration: none;
+            color: black;
+            padding: 10px 15px;
+        }
+
+        .main-content {
+            padding: 20px 40px;
+        }
+
+        .profile-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 40px;
+        }
+
+        h2 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .edit-button {
+            background-color: #FFB380;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .edit-button:hover {
+            background-color: #FF9F55;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .edit-form {
+            margin-top: 10px;
+        }
+
+        .edit-form input {
+            margin: 5px 0;
+            padding: 5px;
+        }
+
+        #uploadPhotoBtn {
+            background-color: #FFB380;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #uploadPhotoBtn:hover {
+            background-color: #FF9F55;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Innova-Dent">
+        </div>
+        <div class="nav-buttons">
+            <a href="perfil administrador.html" class="active">Perfil</a>
+            <a href="modificar contenido.html">Editar Contenido</a>
+            <a href="calendario citas admin.html">Calendario de citas</a>
+        </div>
+        <div class="user-section">
+            <div class="profile-icon"></div>
+            <a href="#" class="logout-button" onclick="logout()">Cerrar sesión</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1>PERFIL</h1>
+        
+        <div class="profile-container">
+            <div class="profile-info">
+                <div style="display: flex; align-items: center;">
+                    <h2>Nombre y apellidos</h2>
+                    <button class="edit-button" onclick="toggleEditName()">Editar</button>
+                </div>
+                <p id="nombreCompleto">-</p>
+                <div id="editNameForm" class="edit-form hidden">
+                    <input type="text" id="nombre" placeholder="Nombre">
+                    <input type="text" id="apellido" placeholder="Apellido">
+                    <button onclick="guardarNombre()">Guardar</button>
+                    <button onclick="toggleEditName()">Cancelar</button>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <img src="images/profile-pic.jpg" alt="Foto de perfil" class="profile-photo" id="profileImage">
+                <input type="file" id="photoInput" accept="image/*" style="display: none;">
+                <button id="uploadPhotoBtn" onclick="document.getElementById('photoInput').click()">
+                    Cambiar foto
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        window.onload = function() {
+            const datosGuardados = localStorage.getItem('perfilAdminUsuario');
+            if (datosGuardados) {
+                const datos = JSON.parse(datosGuardados);
+                document.getElementById('nombreCompleto').textContent = 
+                    `${datos.nombre} ${datos.apellido}`.trim();
+                if (datos.fotoPerfil) {
+                    document.getElementById('profileImage').src = datos.fotoPerfil;
+                }
+            }
+        }
+
+        function toggleEditName() {
+            const form = document.getElementById('editNameForm');
+            form.classList.toggle('hidden');
+        }
+
+        function guardarNombre() {
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            
+            const datosGuardados = localStorage.getItem('perfilAdminUsuario') || '{}';
+            const datos = JSON.parse(datosGuardados);
+            
+            datos.nombre = nombre;
+            datos.apellido = apellido;
+            
+            localStorage.setItem('perfilAdminUsuario', JSON.stringify(datos));
+            
+            document.getElementById('nombreCompleto').textContent = `${nombre} ${apellido}`.trim();
+            toggleEditName();
+        }
+
+        // Manejar la subida de foto
+        document.getElementById('photoInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const datosGuardados = localStorage.getItem('perfilAdminUsuario') || '{}';
+                    const datos = JSON.parse(datosGuardados);
+                    
+                    datos.fotoPerfil = e.target.result;
+                    localStorage.setItem('perfilAdminUsuario', JSON.stringify(datos));
+                    
+                    document.getElementById('profileImage').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem('usuarioActual');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+
+</html>

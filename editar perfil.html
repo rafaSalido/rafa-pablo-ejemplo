@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil - Innova-Dent</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            background-color: #FFB380;
+            padding: 10px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            margin-left: 20px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: black;
+            padding: 15px 25px;
+            font-weight: bold;
+        }
+
+        .nav-buttons a.active {
+            background-color: #FF9F55;
+        }
+
+        .user-section {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logout-button {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .main-content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group label.required::after {
+            content: "*";
+            color: red;
+            margin-left: 4px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .button {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #B667F1;
+            color: white;
+        }
+
+        .insert-button {
+            background-color: #B667F1;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Innova-Dent Logo">
+            </a>
+        </div>
+        <div class="nav-buttons">
+            <a href="Perfil.html" class="active">Perfil</a>
+            <a href="mis pruebas.html">Mis pruebas</a>
+            <a href="mis tratamientos.html">Mis tratamientos</a>
+            <a href="mis citas.html">Mis citas</a>
+        </div>
+        <div class="user-section">
+            <img src="images/profile-pic.jpg" alt="Foto de perfil" class="profile-pic">
+            <a href="logout.html" class="logout-button">Cerrar sesión</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1>Edición de Perfil</h1>
+        
+        <form id="perfilForm">
+            <div class="form-group">
+                <label class="required">Nombre</label>
+                <input type="text" id="nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label class="required">Primer apellido</label>
+                <input type="text" id="primerApellido" required>
+            </div>
+
+            <div class="form-group">
+                <label class="required">Edad</label>
+                <input type="number" id="edad" required>
+            </div>
+
+            <div class="form-group">
+                <label>Localidad:</label>
+                <input type="text" id="localidad">
+            </div>
+
+            <div class="form-group">
+                <label>Patología a tener en cuenta:</label>
+                <input type="text" id="patologia">
+            </div>
+
+            <div class="form-group">
+                <label>Número de contacto:</label>
+                <input type="text" id="contacto">
+            </div>
+
+            <div class="form-group">
+                <label>Foto:</label>
+                <div style="display: flex; gap: 10px;">
+                    <input type="file" id="foto" accept="image/*">
+                    <button type="button" class="insert-button" onclick="insertarFoto()">Insertar</button>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button type="button" class="button" onclick="guardarPerfil()">Guardar</button>
+                <button type="button" class="button" onclick="window.location.href='Perfil.html'">Cancelar</button>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        function insertarFoto() {
+            const fileInput = document.getElementById('foto');
+            const file = fileInput.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Guardar la imagen temporalmente
+                    localStorage.setItem('tempFotoPerfil', e.target.result);
+                    // Mostrar mensaje de éxito
+                    alert('Foto insertada correctamente');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function guardarPerfil() {
+            // Obtener los valores del formulario
+            const datos = {
+                nombre: document.getElementById('nombre').value,
+                primerApellido: document.getElementById('primerApellido').value,
+                edad: document.getElementById('edad').value,
+                localidad: document.getElementById('localidad').value,
+                patologia: document.getElementById('patologia').value,
+                contacto: document.getElementById('contacto').value,
+                fotoPerfil: localStorage.getItem('tempFotoPerfil') // Usar la foto temporal
+            };
+
+            // Guardar los datos en localStorage
+            localStorage.setItem('perfilUsuario', JSON.stringify(datos));
+            
+            // Limpiar la foto temporal
+            localStorage.removeItem('tempFotoPerfil');
+
+            // Redirigir a perfil
+            window.location.href = 'Perfil.html';
+        }
+
+        // Cargar datos existentes al abrir la página
+        window.onload = function() {
+            const datosGuardados = localStorage.getItem('perfilUsuario');
+            if (datosGuardados) {
+                const datos = JSON.parse(datosGuardados);
+                document.getElementById('nombre').value = datos.nombre || '';
+                document.getElementById('primerApellido').value = datos.primerApellido || '';
+                document.getElementById('edad').value = datos.edad || '';
+                document.getElementById('localidad').value = datos.localidad || '';
+                document.getElementById('patologia').value = datos.patologia || '';
+                document.getElementById('contacto').value = datos.contacto || '';
+            }
+        }
+    </script>
+</body>
+
+</html>

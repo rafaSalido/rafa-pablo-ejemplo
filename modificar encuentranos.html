@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Encuéntranos - Innova-Dent</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, #FFB380, #FFDAB3);
+            padding: 10px 20px;
+            height: 80px;
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        .logout-button {
+            margin-left: auto;
+            text-decoration: none;
+            color: black;
+            padding: 10px 15px;
+            background-color: #FFB380;
+            border-radius: 4px;
+        }
+
+        .logout-button:hover {
+            background-color: #FF9F55;
+        }
+
+        .form-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #FFB380;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .save-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #FF9F55;
+            border: 1px solid #000;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px;
+            background-color: #FFB380;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .image-preview {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Innova-Dent Logo">
+            </a>
+        </div>
+        <a href="#" class="logout-button" onclick="logout()">Cerrar sesión</a>
+    </nav>
+
+    <div class="form-container">
+        <form onsubmit="event.preventDefault(); guardarCambios();">
+            <div class="form-group">
+                <label for="fotoLocal">Cambiar Foto del Local</label>
+                <input type="file" id="fotoLocal" name="fotoLocal" accept="image/*" onchange="previewImage(this, 'previewLocal')">
+                <img id="previewLocal" class="image-preview" src="#" alt="Vista previa" style="display: none;">
+            </div>
+
+            <div class="form-group">
+                <label for="mapaUrl">Cambiar Mapa (URL de Google Maps)</label>
+                <input type="url" id="mapaUrl" name="mapaUrl" required>
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Número de teléfono</label>
+                <input type="tel" id="telefono" name="telefono" value="+34 636 34 91 59" required>
+            </div>
+
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" name="direccion" value="C/ Agua Nº31 Bajo B" required>
+            </div>
+
+            <div class="form-group">
+                <label for="poblacion">Población</label>
+                <input type="text" id="poblacion" name="poblacion" value="Berja" required>
+            </div>
+
+            <button type="submit" class="save-button">Guardar</button>
+        </form>
+    </div>
+
+    <a href="modificar contenido.html" class="back-button">←</a>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('usuarioActual');
+            window.location.href = 'login.html';
+        }
+
+        function previewImage(input, previewId) {
+            const preview = document.getElementById(previewId);
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function guardarCambios() {
+            const telefono = document.getElementById('telefono').value;
+            const direccion = document.getElementById('direccion').value;
+            const poblacion = document.getElementById('poblacion').value;
+            const mapaUrl = document.getElementById('mapaUrl').value;
+
+            // Guardar en localStorage
+            localStorage.setItem('encuentranosTelefono', telefono);
+            localStorage.setItem('encuentranosDireccion', direccion);
+            localStorage.setItem('encuentranosPoblacion', poblacion);
+            localStorage.setItem('encuentranosMapaUrl', mapaUrl);
+
+            // Guardar la imagen si se ha seleccionado una
+            const fotoLocal = document.getElementById('previewLocal').src;
+            if (fotoLocal !== '#') {
+                localStorage.setItem('encuentranosFotoLocal', fotoLocal);
+            }
+
+            alert('Cambios guardados correctamente');
+            window.location.href = 'modificar contenido.html';
+        }
+
+        // Cargar datos guardados al iniciar
+        window.onload = function() {
+            const telefono = localStorage.getItem('encuentranosTelefono');
+            const direccion = localStorage.getItem('encuentranosDireccion');
+            const poblacion = localStorage.getItem('encuentranosPoblacion');
+            const mapaUrl = localStorage.getItem('encuentranosMapaUrl');
+            const fotoLocal = localStorage.getItem('encuentranosFotoLocal');
+
+            // Establecer valores por defecto si no hay datos guardados
+            if (!telefono) localStorage.setItem('encuentranosTelefono', '+34 636 34 91 59');
+            if (!direccion) localStorage.setItem('encuentranosDireccion', 'C/ Agua Nº31 Bajo B');
+            if (!poblacion) localStorage.setItem('encuentranosPoblacion', 'Berja');
+
+            // Cargar datos en el formulario
+            document.getElementById('telefono').value = telefono || '+34 636 34 91 59';
+            document.getElementById('direccion').value = direccion || 'C/ Agua Nº31 Bajo B';
+            document.getElementById('poblacion').value = poblacion || 'Berja';
+            if (mapaUrl) document.getElementById('mapaUrl').value = mapaUrl;
+            if (fotoLocal) {
+                document.getElementById('previewLocal').src = fotoLocal;
+                document.getElementById('previewLocal').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Citas - Innova-Dent</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            background-color: #FFB380;
+            padding: 10px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            margin-left: 20px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: black;
+            padding: 15px 25px;
+            font-weight: bold;
+        }
+
+        .nav-buttons a.active {
+            background-color: #FF9F55;
+        }
+
+        .user-section {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logout-button {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .main-content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .citas-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .calendar-container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .calendar-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+        }
+
+        .description-box {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .historial-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .historial-list li {
+            margin-bottom: 15px;
+        }
+
+        .pending-payment {
+            margin-top: 30px;
+        }
+
+        .pending-payment h3 {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .historial-list a {
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
+        }
+
+        .historial-list a:hover {
+            color: #FF9F55;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Innova-Dent Logo">
+            </a>
+        </div>
+        <div class="nav-buttons">
+            <a href="Perfil.html">Perfil</a>
+            <a href="mis pruebas.html">Mis pruebas</a>
+            <a href="mis tratamientos.html">Mis tratamientos</a>
+            <a href="mis citas.html" class="active">Mis citas</a>
+        </div>
+        <div class="user-section">
+            <img src="images/profile-pic.jpg" alt="Foto de perfil" class="profile-pic">
+            <a href="#" onclick="logout()" class="logout-button">Cerrar sesión</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1>MIS CITAS</h1>
+        
+        <section class="citas-section">
+            <h2 class="section-title">Citas próximas</h2>
+            <div class="calendar-container">
+                <img src="images/calendar.jpg" alt="Calendario de citas" class="calendar-image">
+            </div>
+            
+            <div class="description-box">
+                <p>Asunto (breve descripción)</p>
+            </div>
+        </section>
+
+        <section class="citas-section">
+            <h2 class="section-title">Historial de citas</h2>
+            <ul class="historial-list">
+                <li><a href="cita.html?id=1">Cita 13/08/2024 Endodoncia unirradicular</a></li>
+                <li><a href="cita.html?id=2">Cita 22/09/2024 Férulas</a></li>
+            </ul>
+        </section>
+
+        <section class="pending-payment">
+            <h3>Pendientes de pago / En Financiación</h3>
+            <ul class="historial-list">
+                <li><a href="cita.html?id=2">Cita 22/09/2024 Férulas</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        window.onload = function() {
+            // Verificar usuario logueado
+            const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual'));
+            if (!usuarioActual) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Cargar citas del usuario
+            const todasLasCitas = JSON.parse(localStorage.getItem('citas') || '[]');
+            const citasUsuario = todasLasCitas.filter(cita => cita.clienteEmail === usuarioActual.email);
+
+            // Separar citas por estado
+            const citasProximas = citasUsuario.filter(cita => new Date(cita.dia) >= new Date());
+            const citasPasadas = citasUsuario.filter(cita => new Date(cita.dia) < new Date());
+
+            // Mostrar citas próximas
+            const citasProximasHTML = citasProximas.map(cita => `
+                <div class="description-box">
+                    <a href="cita.html?id=${cita.id}" style="text-decoration: none; color: inherit;">
+                        <p>Fecha: ${cita.dia} - Hora: ${cita.hora}</p>
+                        <p>Tratamiento: ${cita.tratamiento}</p>
+                        <p>Estado: ${cita.estado}</p>
+                    </a>
+                </div>
+            `).join('');
+            document.querySelector('.calendar-container').innerHTML = citasProximasHTML;
+
+            // Mostrar historial de citas
+            const historialHTML = citasPasadas.map(cita => `
+                <li><a href="cita.html?id=${cita.id}">
+                    Cita ${cita.dia} ${cita.tratamiento}
+                </a></li>
+            `).join('');
+            document.querySelector('.historial-list').innerHTML = historialHTML;
+
+            // Cargar foto de perfil
+            const datosGuardados = localStorage.getItem('perfilUsuario');
+            if (datosGuardados) {
+                const datos = JSON.parse(datosGuardados);
+                if (datos.fotoPerfil) {
+                    const profileImages = document.querySelectorAll('.profile-pic');
+                    profileImages.forEach(img => {
+                        img.src = datos.fotoPerfil;
+                    });
+                }
+            }
+        };
+
+        function logout() {
+            localStorage.removeItem('usuarioActual');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+
+</html>

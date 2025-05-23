@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Blog</title>
+    <link rel="stylesheet" href="css/blog.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="images/logo.png" alt="Innova-Dent Logo"></a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="conocenos.html">¡Conócenos!</a></li>
+                    <li><a href="citas.html">Citas</a></li>
+                    <li>
+                        <a href="tratamientos.html" class="dropdown-toggle">Tratamientos</a>
+                        <ul class="dropdown">
+                            <li><a href="paginaOdontologia.html">Odontología general</a></li>
+                            <li><a href="paginaOrtodoncia.html">Ortodoncia</a></li>
+                            <li><a href="paginaCirugia.html">Cirugía</a></li>
+                            <li><a href="paginaEndodoncia.html">Endodoncia</a></li>
+                            <li><a href="paginaEstetica.html">Estética</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="encuentranos.html">¡Encuéntranos!</a></li>
+                    <li><a href="profesionales.html">Nuestros Profesionales</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="financiacion.html">Financiación</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main style="max-width: 800px; margin: 40px auto; padding: 20px;">
+        <article>
+            <div style="display: flex; gap: 20px; margin-bottom: 30px;">
+                <img id="entradaImagen" src="" alt="Imagen de la entrada" style="width: 300px; height: auto;">
+                <div>
+                    <h1 id="entradaTitulo" style="margin-top: 0;"></h1>
+                    <p id="entradaTexto"></p>
+                </div>
+            </div>
+        </article>
+
+        <section class="comentarios" style="margin-top: 40px;">
+            <h2>Lista de Comentarios</h2>
+            
+            <div style="background-color: #FFE4D6; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <h3 style="text-align: center;">Añadir comentario</h3>
+                <form id="comentarioForm" style="display: none;">
+                    <div style="margin-bottom: 10px;">
+                        <label for="nombreComentario">Nombre:</label>
+                        <input type="text" id="nombreComentario" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <label for="textoComentario">Comentario:</label>
+                        <textarea id="textoComentario" required style="width: 100%; padding: 8px; margin-top: 5px; min-height: 100px;"></textarea>
+                    </div>
+                    <button type="submit" style="padding: 10px 20px; background-color: white; border: none; border-radius: 4px; cursor: pointer;">Enviar</button>
+                </form>
+                <button id="mostrarFormulario" style="padding: 10px 20px; background-color: white; border: none; border-radius: 4px; cursor: pointer;">Responder</button>
+            </div>
+
+            <div id="listaComentarios">
+                <!-- Los comentarios se cargarán aquí dinámicamente -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background-color: #FFE4D6;">
+            <div>
+                <img src="images/logo.png" alt="Innova-Dent" style="width: 200px;">
+            </div>
+            <div style="text-align: left;">
+                <h3>CLÍNICA DENTAL BERJA</h3>
+                <p>📍 C/ Agua Nº31 Bajo B</p>
+                <p>📞 +34 636 34 91 59</p>
+                <p>📧 innovadentberja@gmail.com</p>
+            </div>
+            <div style="display: flex; gap: 20px;">
+                <a href="#"><img src="images/whatsapp-icon.png" alt="WhatsApp" style="width: 30px;"></a>
+                <a href="#"><img src="images/instagram-icon.png" alt="Instagram" style="width: 30px;"></a>
+                <a href="#"><img src="images/facebook-icon.png" alt="Facebook" style="width: 30px;"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/tu-codigo.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        window.onload = function() {
+            // Obtener el ID de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const entradaId = urlParams.get('id');
+
+            // Definir el contenido de las entradas predefinidas
+            const entradasPredefinidas = {
+                '1': {
+                    titulo: 'Cuidados dentales en niños',
+                    imagen: 'images/noticia1.jpg',
+                    texto: 'Los cuidados dentales desde temprana edad son fundamentales...'
+                },
+                '2': {
+                    titulo: 'Beneficios de la ortodoncia invisible',
+                    imagen: 'images/noticia2.jpg',
+                    texto: 'La ortodoncia invisible se ha convertido en una opción muy popular...'
+                },
+                '3': {
+                    titulo: 'Importancia de las revisiones periódicas',
+                    imagen: 'images/noticia3.jpg',
+                    texto: 'Las revisiones dentales regulares son esenciales...'
+                }
+            };
+
+            // Obtener las entradas dinámicas del localStorage
+            const entradasDinamicas = JSON.parse(localStorage.getItem('blogEntradas') || '[]');
+            
+            // Buscar la entrada en ambas fuentes
+            let entrada;
+            if (entradasPredefinidas[entradaId]) {
+                entrada = entradasPredefinidas[entradaId];
+            } else {
+                entrada = entradasDinamicas.find(e => e.id === parseInt(entradaId));
+            }
+
+            // Cargar el contenido correspondiente
+            if (entrada) {
+                document.getElementById('entradaImagen').src = entrada.imagen;
+                document.getElementById('entradaImagen').alt = entrada.titulo;
+                document.getElementById('entradaTitulo').textContent = entrada.titulo;
+                document.getElementById('entradaTexto').textContent = entrada.contenido || entrada.texto;
+                document.title = entrada.titulo + ' - Innova-Dent Blog';
+            } else {
+                // Redireccionar al blog si no se encuentra la entrada
+                window.location.href = 'blog.html';
+            }
+
+            // Funcionalidad para comentarios
+            const mostrarFormularioBtn = document.getElementById('mostrarFormulario');
+            const formularioComentario = document.getElementById('comentarioForm');
+            const listaComentarios = document.getElementById('listaComentarios');
+
+            // Mostrar/ocultar formulario
+            mostrarFormularioBtn.addEventListener('click', () => {
+                formularioComentario.style.display = formularioComentario.style.display === 'none' ? 'block' : 'none';
+                mostrarFormularioBtn.style.display = 'none';
+            });
+
+            // Manejar envío de comentarios
+            formularioComentario.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const nombre = document.getElementById('nombreComentario').value;
+                const texto = document.getElementById('textoComentario').value;
+                const fecha = new Date().toLocaleDateString();
+
+                // Obtener comentarios existentes o crear array vacío
+                const comentariosGuardados = JSON.parse(localStorage.getItem(`comentarios_${entradaId}`) || '[]');
+
+                // Añadir nuevo comentario
+                comentariosGuardados.push({
+                    nombre,
+                    texto,
+                    fecha
+                });
+
+                // Guardar en localStorage
+                localStorage.setItem(`comentarios_${entradaId}`, JSON.stringify(comentariosGuardados));
+
+                // Limpiar formulario y ocultarlo
+                formularioComentario.reset();
+                formularioComentario.style.display = 'none';
+                mostrarFormularioBtn.style.display = 'block';
+
+                // Actualizar lista de comentarios
+                mostrarComentarios();
+            });
+
+            // Función para mostrar comentarios
+            function mostrarComentarios() {
+                const comentarios = JSON.parse(localStorage.getItem(`comentarios_${entradaId}`) || '[]');
+                
+                listaComentarios.innerHTML = comentarios.map(comentario => `
+                    <div style="background-color: #FFE4D6; padding: 20px; border-radius: 8px; margin-bottom: 10px;">
+                        <strong>${comentario.nombre}</strong>
+                        <small style="float: right">${comentario.fecha}</small>
+                        <p style="margin-top: 10px;">${comentario.texto}</p>
+                    </div>
+                `).join('');
+            }
+
+            // Mostrar comentarios al cargar la página
+            mostrarComentarios();
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Conócenos! - Innova-Dent</title>
+    <link rel="stylesheet" href="css/financiacion.css">
+    <style>
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #FFE4D6;
+            margin: 15% auto;
+            padding: 20px;
+            width: 70%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+
+        .close-button {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-title {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .modal-text {
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* Estilos para las tarjetas y las imágenes */
+        .financiacion-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .financiacion-card {
+            background-color: #FFE4D6;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .financiacion-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .financing-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .financing-content h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .financing-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: #FFB380;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #FF9955;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="images/logo.png" alt="Innova-Dent Logo"></a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="conocenos.html">¡Conócenos!</a></li>
+                    <li><a href="citas.html">Citas</a></li>
+                    <li>
+                        <a href="tratamientos.html" class="dropdown-toggle">Tratamientos</a>
+                        <ul class="dropdown">
+                            <li><a href="paginaOdontologia.html">Odontología general</a></li>
+                            <li><a href="paginaOrtodoncia.html">Ortodoncia</a></li>
+                            <li><a href="paginaCirugia.html">Cirugía</a></li>
+                            <li><a href="paginaEndodoncia.html">Endodoncia</a></li>
+                            <li><a href="paginaEstetica.html">Estética</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="encuentranos.html">¡Encuéntranos!</a></li>
+                    <li><a href="profesionales.html">Nuestros Profesionales</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="financiacion.html">Financiación</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+    <div class="financiacion-container">
+        <div class="financiacion-card">
+            <img src="images/financiacion1.png" alt="Financiación Básica">
+            <div class="financing-content">
+                <h2>Plan Básico</h2>
+                <p>Financiación a 6 meses sin intereses para tratamientos básicos.</p>
+                <button onclick="openModal('modal1')" class="btn">Más info</button>
+            </div>
+        </div>
+
+        <div class="financiacion-card">
+            <img src="images/financiacion2.png" alt="Financiación Estándar">
+            <div class="financing-content">
+                <h2>Plan Estándar</h2>
+                <p>Financiación flexible hasta 12 meses para tratamientos generales.</p>
+                <button onclick="openModal('modal2')" class="btn">Más info</button>
+            </div>
+        </div>
+
+        <div class="financiacion-card">
+            <img src="images/financiacion3.png" alt="Financiación Premium">
+            <div class="financing-content">
+                <h2>Plan Premium</h2>
+                <p>Financiación personalizada hasta 24 meses para tratamientos completos.</p>
+                <button onclick="openModal('modal3')" class="btn">Más info</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modales -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('modal1')">&times;</span>
+            <h2 class="modal-title">Plan Básico - Detalles</h2>
+            <div class="modal-text">
+                <h3>Características principales:</h3>
+                <ul>
+                    <li>Financiación a 6 meses sin intereses</li>
+                    <li>Para tratamientos hasta 1.000€</li>
+                    <li>Sin comisión de apertura</li>
+                    <li>Documentación mínima requerida</li>
+                </ul>
+                <h3>Ventajas:</h3>
+                <ul>
+                    <li>Proceso de aprobación rápido</li>
+                    <li>Cuotas fijas mensuales</li>
+                    <li>Sin penalización por cancelación anticipada</li>
+                </ul>
+                <p>Ideal para tratamientos como limpiezas profundas, empastes o blanqueamientos.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('modal2')">&times;</span>
+            <h2 class="modal-title">Plan Estándar - Detalles</h2>
+            <div class="modal-text">
+                <h3>Características principales:</h3>
+                <ul>
+                    <li>Financiación hasta 12 meses</li>
+                    <li>Para tratamientos hasta 3.000€</li>
+                    <li>Interés fijo del 4% anual</li>
+                    <li>Posibilidad de incluir varios tratamientos</li>
+                </ul>
+                <h3>Ventajas:</h3>
+                <ul>
+                    <li>Mayor flexibilidad en los pagos</li>
+                    <li>Posibilidad de modificar cuotas</li>
+                    <li>Incluye seguro dental básico</li>
+                </ul>
+                <p>Perfecto para tratamientos como ortodoncias o implantes individuales.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('modal3')">&times;</span>
+            <h2 class="modal-title">Plan Premium - Detalles</h2>
+            <div class="modal-text">
+                <h3>Características principales:</h3>
+                <ul>
+                    <li>Financiación hasta 24 meses</li>
+                    <li>Sin límite de importe</li>
+                    <li>Interés personalizado según perfil</li>
+                    <li>Plan totalmente adaptable</li>
+                </ul>
+                <h3>Ventajas:</h3>
+                <ul>
+                    <li>Máxima flexibilidad</li>
+                    <li>Incluye seguro dental completo</li>
+                    <li>Asesoramiento financiero personalizado</li>
+                    <li>Posibilidad de carencia inicial</li>
+                </ul>
+                <p>Ideal para tratamientos completos de implantes o rehabilitaciones totales.</p>
+            </div>
+        </div>
+    </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Innova-Dent">
+            </div>
+            <div class="footer-info">
+                <div class="contact-info">
+                    <h2>CLÍNICA DENTAL BERJA</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <img src="images/location-icon.png" alt="Ubicación">
+                            <span>C/ Agua Nº31 Bajo B</span>
+                        </div>
+                        <div class="contact-item">
+                            <img src="images/phone-icon.png" alt="Teléfono">
+                            <span>+34 636 34 91 59</span>
+                        </div>
+                        <div class="contact-item">
+                            <img src="images/email-icon.png" alt="Email">
+                            <span>innovadentberja@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="footer-links"></div>
+                    <a href="aviso-legal.html">Aviso Legal</a>
+                    <a href="politica-de-privacidad.html">Política de Privacidad</a>
+                    <a href="terminos-de-uso.html">Términos de Uso</a>
+                    <a href="cookies.html">Cookies</a>
+                </div>
+                </div>
+                <div class="social-media">
+                    <a href="#"><img src="images/whatsapp-icon.png" alt="WhatsApp" class="whatsapp"></a>
+                    <img src="images/instagram-icon.png" alt="Instagram">
+                    <a href="#"><img src="images/facebook-icon.png" alt="Facebook" class="facebook"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome para iconos -->
+    <script src="https://kit.fontawesome.com/tu-codigo.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/carousel.js"></script>
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        // Cerrar modal al hacer clic fuera de él
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>

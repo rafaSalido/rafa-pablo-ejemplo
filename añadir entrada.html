@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añadir Entrada - Innova-Dent</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, #FFB380, #FFDAB3);
+            padding: 10px 20px;
+            height: 80px;
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        .nav-buttons {
+            display: flex;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: black;
+            padding: 15px 25px;
+            background-color: #FFB380;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #FF9F55;
+        }
+
+        .user-section {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #FFB380;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            height: 200px;
+            resize: vertical;
+        }
+
+        .photo-upload {
+            border: 2px dashed #999;
+            padding: 20px;
+            text-align: center;
+            background-color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .photo-upload:hover {
+            background-color: #f8f8f8;
+        }
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #FF9F55;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .submit-button:hover {
+            background-color: #ff8c33;
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #FFB380;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .back-button:hover {
+            background-color: #FF9F55;
+        }
+
+        .entradas-existentes {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .entrada-item {
+            display: flex;
+            align-items: center;
+            background-color: #FFB380;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .entrada-imagen {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+
+        .entrada-info {
+            flex-grow: 1;
+        }
+
+        .entrada-titulo {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .entrada-descripcion {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .entrada-fecha {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .borrar-entrada {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .borrar-entrada:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Innova-Dent Logo">
+            </a>
+        </div>
+        <div class="nav-buttons">
+            <a href="perfil administrador.html">Perfil</a>
+            <a href="modificar contenido.html">Editar Contenido</a>
+            <a href="calendario citas admin.html">Calendario de citas</a>
+            <a href="añadir entrada.html" style="background-color: #FF9F55;">Añadir entrada</a>
+        </div>
+        <div class="user-section">
+            <div class="profile-icon"></div>
+            <a href="#" class="logout-button" onclick="logout()">Cerrar sesión</a>
+        </div>
+    </nav>
+
+    <div class="form-container">
+        <div class="form-group">
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="titulo">
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripción corta</label>
+            <input type="text" id="descripcion" name="descripcion">
+        </div>
+
+        <div class="form-group">
+            <label for="contenido">Contenido</label>
+            <textarea id="contenido" name="contenido"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Foto</label>
+            <div class="photo-upload" onclick="document.getElementById('fileInput').click()">
+                <input type="file" id="fileInput" style="display: none" accept="image/*">
+                <p>Insertar foto</p>
+            </div>
+        </div>
+
+        <button class="submit-button">Guardar</button>
+    </div>
+
+    <div class="entradas-existentes">
+        <h2>Entradas Existentes</h2>
+        <div id="lista-entradas"></div>
+    </div>
+
+    <div class="back-button" onclick="window.location.href='modificar contenido.html'">
+        ←
+    </div>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('usuarioActual');
+            window.location.href = 'login.html';
+        }
+
+        document.querySelector('.submit-button').addEventListener('click', function() {
+            const titulo = document.getElementById('titulo').value;
+            const descripcion = document.getElementById('descripcion').value;
+            const contenido = document.getElementById('contenido').value;
+            const fileInput = document.getElementById('fileInput');
+            
+            if (!titulo || !descripcion || !contenido) {
+                alert('Por favor, rellena todos los campos');
+                return;
+            }
+
+            if (fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const nuevaEntrada = {
+                        id: Date.now(),
+                        titulo: titulo,
+                        descripcion: descripcion,
+                        contenido: contenido,
+                        imagen: e.target.result,
+                        fecha: new Date().toLocaleDateString()
+                    };
+
+                    let entradas = JSON.parse(localStorage.getItem('blogEntradas') || '[]');
+                    entradas.push(nuevaEntrada);
+                    localStorage.setItem('blogEntradas', JSON.stringify(entradas));
+                    
+                    alert('Entrada guardada correctamente');
+                    
+                    document.getElementById('titulo').value = '';
+                    document.getElementById('descripcion').value = '';
+                    document.getElementById('contenido').value = '';
+                    document.getElementById('fileInput').value = '';
+                    cargarEntradasExistentes();
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                alert('Por favor, selecciona una imagen');
+            }
+        });
+
+        function cargarEntradasExistentes() {
+            const contenedor = document.getElementById('lista-entradas');
+            const entradas = JSON.parse(localStorage.getItem('blogEntradas') || '[]');
+            
+            contenedor.innerHTML = '';
+            
+            entradas.forEach(entrada => {
+                const entradaHTML = `
+                    <div class="blog-post" style="display: flex; align-items: center; justify-content: center; margin: 20px 0; max-width: 900px; position: relative;">
+                        <img src="${entrada.imagen}" alt="Imagen del Post" style="width: 150px; height: auto; margin-right: 20px;">
+                        <div style="flex-grow: 1;">
+                            <h2 style="text-align: left;">${entrada.titulo}</h2>
+                            <p style="text-align: left;">${entrada.descripcion}</p>
+                            <button class="borrar-entrada" onclick="borrarEntrada(${entrada.id})" style="position: absolute; bottom: 10px; right: 10px; background-color: #ff4444; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">Borrar</button>
+                        </div>
+                    </div>
+                `;
+                contenedor.innerHTML += entradaHTML;
+            });
+        }
+
+        function borrarEntrada(id) {
+            if (confirm('¿Estás seguro de que quieres borrar esta entrada?')) {
+                let entradas = JSON.parse(localStorage.getItem('blogEntradas') || '[]');
+                entradas = entradas.filter(entrada => entrada.id !== id);
+                localStorage.setItem('blogEntradas', JSON.stringify(entradas));
+                cargarEntradasExistentes();
+            }
+        }
+
+        window.onload = cargarEntradasExistentes;
+    </script>
+</body>
+
+</html>

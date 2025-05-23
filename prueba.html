@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba 1 - Innova-Dent</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            background-color: #FFB380;
+            padding: 10px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            margin-left: 20px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: black;
+            padding: 15px 25px;
+            font-weight: bold;
+        }
+
+        .nav-buttons a.active {
+            background-color: #FF9F55;
+        }
+
+        .user-section {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logout-button {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .main-content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .xray-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .comments-section {
+            text-align: left;
+            margin-top: 30px;
+        }
+
+        .comments-section h2 {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Innova-Dent Logo">
+            </a>
+        </div>
+        <div class="nav-buttons">
+            <a href="Perfil.html">Perfil</a>
+            <a href="mis pruebas.html" class="active">Mis pruebas</a>
+            <a href="mis tratamientos.html">Mis tratamientos</a>
+            <a href="mis citas.html">Mis citas</a>
+        </div>
+        <div class="user-section">
+            <img src="images/profile-pic.jpg" alt="Foto de perfil" class="profile-pic">
+            <a href="#" onclick="logout()" class="logout-button">Cerrar sesión</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1>PRUEBA 1</h1>
+        
+        <img src="images/dental-xray.jpg" alt="Radiografía dental" class="xray-image">
+        
+        <div class="comments-section">
+            <h2>Comentarios del especialista</h2>
+            <div class="comments-content">
+                <!-- Aquí irían los comentarios del especialista -->
+            </div>
+        </div>
+    </main>
+    <script>
+        // Verificar si hay usuario logueado al cargar la página
+        window.onload = function() {
+            const usuarioActual = localStorage.getItem('usuarioActual');
+            if (!usuarioActual) {
+                window.location.href = 'login.html';
+                return;
+            }
+    
+            // Mantener el código existente de carga de foto de perfil
+            const datosGuardados = localStorage.getItem('perfilUsuario');
+            if (datosGuardados) {
+                const datos = JSON.parse(datosGuardados);
+                if (datos.fotoPerfil) {
+                    const profileImages = document.querySelectorAll('.profile-pic');
+                    profileImages.forEach(img => {
+                        img.src = datos.fotoPerfil;
+                    });
+                }
+            }
+        }
+    
+        // Función para cerrar sesión
+        function logout() {
+            localStorage.removeItem('usuarioActual');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+<script>
+    window.onload = function() {
+        // Obtener el ID de la prueba de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const pruebaId = urlParams.get('id');
+
+        // Definir el contenido para cada prueba
+        const pruebas = {
+            '1': {
+                titulo: 'PRUEBA 1',
+                imagen: 'images/cirujia4.png',
+                comentarios: 'Comentarios para la prueba 1'
+            },
+            '2': {
+                titulo: 'PRUEBA 2',
+                imagen: 'images/cirujia2.png',
+                comentarios: 'Comentarios para la prueba 2'
+            }
+        };
+
+        // Actualizar el contenido de la página
+        if (pruebaId && pruebas[pruebaId]) {
+            const prueba = pruebas[pruebaId];
+            document.querySelector('h1').textContent = prueba.titulo;
+            document.querySelector('.xray-image').src = prueba.imagen;
+            document.querySelector('.xray-image').alt = `Cirugía dental ${pruebaId}`;
+            document.querySelector('.comments-content').textContent = prueba.comentarios;
+        }
+
+        // Cargar la foto de perfil
+        const datosGuardados = localStorage.getItem('perfilUsuario');
+        if (datosGuardados) {
+            const datos = JSON.parse(datosGuardados);
+            if (datos.fotoPerfil) {
+                const profileImages = document.querySelectorAll('.profile-pic');
+                profileImages.forEach(img => {
+                    img.src = datos.fotoPerfil;
+                });
+            }
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="site-title">Innova-Dent - Clínica Dental</title>
+    <link rel="stylesheet" href="css/styles.css">
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="images/logo.png" alt="Innova-Dent Logo"></a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="conocenos.html" data-translate="about">¡Conócenos!</a></li>
+                    <li><a href="citas.html" data-translate="appointments">Citas</a></li>
+                    <li>
+                        <a href="tratamientos.html" class="dropdown-toggle" data-translate="treatments">Tratamientos</a>
+                        <ul class="dropdown">
+                            <li><a href="paginaOdontologia.html" data-translate="general-dentistry">Odontología general</a></li>
+                            <li><a href="paginaOrtodoncia.html" data-translate="orthodontics">Ortodoncia</a></li>
+                            <li><a href="paginaCirugia.html" data-translate="surgery">Cirugía</a></li>
+                            <li><a href="paginaEndodoncia.html" data-translate="endodontics">Endodoncia</a></li>
+                            <li><a href="paginaEstetica.html" data-translate="aesthetics">Estética</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="encuentranos.html" data-translate="find-us">¡Encuéntranos!</a></li>
+                    <li><a href="profesionales.html" data-translate="our-professionals">Nuestros Profesionales</a></li>
+                    <li><a href="blog.html" data-translate="blog">Blog</a></li>
+                    <li><a href="financiacion.html" data-translate="financing">Financiación</a></li>
+                    <li><a href="login.html" data-translate="login">Login</a></li>
+                </ul>
+            </div>
+            <div class="nav-buttons">
+                <button class="language-button" onclick="toggleLanguage()">
+                    
+                    <span id="languageText">EN</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sección Hero con imagen del letrero -->
+    <section class="hero">
+        <img src="images/innova-dent-letrero.jpg" alt="Innova-Dent">
+    </section>
+
+    <!-- Sección de Noticias -->
+    <section class="noticias">
+        <h2>Noticias del Blog</h2>
+        <div class="noticias-container">
+            <div class="noticias-grid">
+                <div class="noticia-item">
+                    <img src="images/noticia1.jpg" alt="Noticia 1">
+                </div>
+                <div class="noticia-item">
+                    <img src="images/noticia2.jpg" alt="Noticia 2">
+                </div>
+                <div class="noticia-item">
+                    <img src="images/noticia3.jpg" alt="Noticia 3">
+                </div>
+            </div>
+            <div class="boton-container">
+                <a href="blog.html" class="boton-noticias">Más noticias</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Reseñas -->
+    <section class="resenas">
+        <h2>¡Reseñas!</h2>
+        <div class="resenas-container">
+            <button class="nav-button prev">&#10094;</button>
+            <div class="resenas-grid">
+                <div class="resena-item">
+                    <div class="resena-avatar">
+                        <span class="avatar-letra">M</span>
+                    </div>
+                    <h3>Mónica</h3>
+                    <div class="estrellas">
+                        ★★★★★
+                    </div>
+                    <p>Excelente la atención y el profesionalismo de todo el equipo, muy eficientes y amables. Recomiendo al 100%</p>
+                </div>
+                <div class="resena-item">
+                    <div class="resena-avatar">
+                        <span class="avatar-letra">J</span>
+                    </div>
+                    <h3>Jose Manuel</h3>
+                    <div class="estrellas">
+                        ★★★★★
+                    </div>
+                    <p>Atendieron a mi hijo de 10, muy profesionales y amables. Lo Recomiendo 100%</p>
+                </div>
+                <div class="resena-item">
+                    <div class="resena-avatar">
+                        <img src="images/laura-avatar.jpg" alt="Laura">
+                    </div>
+                    <h3>Laura</h3>
+                    <div class="estrellas">
+                        ★★★★★
+                    </div>
+                    <p>Hace un tiempo, tras consultar diferentes centros, me decanté por la clínica para mi tratamiento de ortodoncia invisible.</p>
+                </div>
+            </div>
+            <button class="nav-button next">&#10095;</button>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Innova-Dent">
+            </div>
+            <div class="footer-info">
+                <div class="contact-info">
+                    <h2>CLÍNICA DENTAL BERJA</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <img src="images/location-icon.png" alt="Ubicación">
+                            <span>C/ Agua Nº31 Bajo B</span>
+                        </div>
+                        <div class="contact-item">
+                            <img src="images/phone-icon.png" alt="Teléfono">
+                            <span>+34 636 34 91 59</span>
+                        </div>
+                        <div class="contact-item">
+                            <img src="images/email-icon.png" alt="Email">
+                            <span>innovadentberja@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-media">
+                    <a href="#"><img src="images/whatsapp-icon.png" alt="WhatsApp" class="whatsapp"></a>
+                    <img src="images/instagram-icon.png" alt="Instagram">
+                    <a href="#"><img src="images/facebook-icon.png" alt="Facebook" class="facebook"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome para iconos -->
+    <script src="https://kit.fontawesome.com/tu-codigo.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/translations.js"></script>
+</body>
+</html> 

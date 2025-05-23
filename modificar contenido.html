@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Contenido - Innova-Dent</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, #FFB380, #FFDAB3);
+            padding: 10px 20px;
+            height: 80px;
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        .nav-buttons {
+            display: flex;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: black;
+            padding: 15px 25px;
+            background-color: #FFB380;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #FF9F55;
+        }
+
+        .user-section {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-icon {
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        .logout-button {
+            text-decoration: none;
+            color: black;
+            padding: 10px 15px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin: 30px 0;
+        }
+
+        .section {
+            margin: 10px 0;
+        }
+
+        .section-header {
+            background-color: #FFB380;
+            padding: 8px 15px;
+            margin: 0;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .section-content {
+            padding: 10px 15px;
+        }
+
+        .section-content a {
+            display: block;
+            color: black;
+            text-decoration: none;
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        .section-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilos específicos para secciones con múltiples columnas */
+        .multi-column {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Innova-Dent Logo">
+            </a>
+        </div>
+        <div class="nav-buttons">
+            <a href="perfil administrador.html">Perfil</a>
+            <a href="modificar contenido.html" style="background-color: #FF9F55;">Editar Contenido</a>
+            <a href="calendario citas admin.html">Calendario de citas</a>
+        </div>
+        <div class="user-section">
+            <div class="profile-icon"></div>
+            <a href="#" class="logout-button">Cerrar sesión</a>
+        </div>
+    </nav>
+
+    <h1>MODIFICAR CONTENIDO</h1>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>¡Conócenos!</h2>
+        </div>
+        <div class="section-content">
+            <a href="modificar conocenos.html#informacion">Modificar Información</a>
+            <a href="modificar conocenos.html#video">Cambiar Video</a>
+            <a href="modificar conocenos.html#profesionales">Modificar Nuestros Profesionales</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>Blog</h2>
+        </div>
+        <div class="section-content multi-column">
+            <a href="añadir entrada.html">Añadir Entrada</a>
+            <a href="añadir entrada.html">Cambiar Foto del Blog</a>
+            <a href="añadir entrada.html">Eliminar Entrada</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>Nuestros Profesionales!</h2>
+        </div>
+        <div class="section-content multi-column">
+            <a href="#">Cambiar Foto de Nuestros Profesionales</a>
+            <a href="#">Cambiar Foto Portada</a>
+            <a href="#">Eliminar Personal</a>
+            <a href="#">Modificar Información</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>¡Encuéntranos!</h2>
+        </div>
+        <div class="section-content">
+            <a href="modificar encuentranos.html#fotoLocal">Cambiar Foto del Local</a>
+            <a href="modificar encuentranos.html#mapaUrl">Cambiar Mapa</a>
+            <a href="modificar encuentranos.html#contacto">Modificar Datos de Contacto</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>Citas</h2>
+        </div>
+        <div class="section-content">
+            <a href="añadir cita.html">Añadir cita</a>
+            <a href="añadir cita.html">Modificar cita</a>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('usuarioActual');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+
+</html>

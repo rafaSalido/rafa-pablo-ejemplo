@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pruebas - Innova-Dent</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            background-color: #FFB380;
+            padding: 10px 20px;
+            border-bottom: 2px solid #0099FF;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            margin-left: 20px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: black;
+            padding: 15px 25px;
+            font-weight: bold;
+        }
+
+        .nav-buttons a.active {
+            background-color: #FF9F55;
+        }
+
+        .user-section {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logout-button {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .pruebas-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .prueba-card {
+            text-align: center;
+        }
+
+        .prueba-card img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .prueba-card p {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .prueba-card a {
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
+        }
+
+        .prueba-card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Innova-Dent Logo">
+            </a>
+        </div>
+        <div class="nav-buttons">
+            <a href="Perfil.html">Perfil</a>
+            <a href="mis pruebas.html" class="active">Mis pruebas</a>
+            <a href="mis tratamientos.html">Mis tratamientos</a>
+            <a href="mis citas.html">Mis citas</a>
+        </div>
+        <div class="user-section">
+            <img src="images/profile-pic.jpg" alt="Foto de perfil" class="profile-pic">
+            <a href="#" onclick="logout()" class="logout-button">Cerrar sesión</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1>MIS PRUEBAS</h1>
+        
+        <div class="pruebas-container">
+            <div class="prueba-card">
+                <a href="prueba.html?id=1">
+                    <img src="images/cirujia4.png" alt="Cirugía dental 1">
+                    <p>Prueba 1</p>
+                </a>
+            </div>
+            <div class="prueba-card">
+                <a href="prueba.html?id=2">
+                    <img src="images/cirujia2.png" alt="Cirugía dental 2">
+                    <p>Prueba 2</p>
+                </a>
+            </div>
+        </div>
+    </main>
+    <script>
+        // Verificar si hay usuario logueado al cargar la página
+        window.onload = function() {
+            const usuarioActual = localStorage.getItem('usuarioActual');
+            if (!usuarioActual) {
+                window.location.href = 'login.html';
+                return;
+            }
+    
+            // Mantener el código existente de carga de foto de perfil
+            const datosGuardados = localStorage.getItem('perfilUsuario');
+            if (datosGuardados) {
+                const datos = JSON.parse(datosGuardados);
+                if (datos.fotoPerfil) {
+                    const profileImages = document.querySelectorAll('.profile-pic');
+                    profileImages.forEach(img => {
+                        img.src = datos.fotoPerfil;
+                    });
+                }
+            }
+        }
+    
+        // Función para cerrar sesión
+        function logout() {
+            localStorage.removeItem('usuarioActual');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+<script>
+    // Cargar la foto de perfil al cargar la página
+    window.onload = function() {
+        const datosGuardados = localStorage.getItem('perfilUsuario');
+        if (datosGuardados) {
+            const datos = JSON.parse(datosGuardados);
+            if (datos.fotoPerfil) {
+                // Actualizar todas las fotos de perfil en la página
+                const profileImages = document.querySelectorAll('.profile-pic');
+                profileImages.forEach(img => {
+                    img.src = datos.fotoPerfil;
+                });
+            }
+        }
+    }
+</script>
+</html>

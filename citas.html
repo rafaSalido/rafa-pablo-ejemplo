@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="appointments-title">Citas - Innova-Dent</title>
+    <link rel="stylesheet" href="css/citas.css">
+    <style>
+        .calendar {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid black;
+        }
+
+        .calendar th {
+            background-color: black;
+            color: white;
+            padding: 8px;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        .calendar td {
+            border: 1px solid black;
+            padding: 15px;
+            text-align: center;
+            vertical-align: middle;
+            height: 40px;
+        }
+
+        .calendar td.disabled {
+            background-color: #f0f0f0;
+        }
+
+        .calendar td.red {
+            background-color: #FF9F55;
+            color: black;
+        }
+
+        .calendar td.green {
+            background-color: #FFB380;
+            color: black;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 20px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border: 1px solid black;
+        }
+
+        .legend-green {
+            background-color: green;
+        }
+
+        .legend-red {
+            background-color: #FF9F55;
+        }
+
+        .legend-item span {
+            color: black;
+        }
+
+        .legend-item.available span {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="images/logo.png" alt="Innova-Dent Logo"></a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="conocenos.html" data-translate="about">¡Conócenos!</a></li>
+                    <li><a href="citas.html" data-translate="appointments">Citas</a></li>
+                    <li>
+                        <a href="tratamientos.html" class="dropdown-toggle" data-translate="treatments">Tratamientos</a>
+                        <ul class="dropdown">
+                            <li><a href="paginaOdontologia.html" data-translate="general-dentistry">Odontología general</a></li>
+                            <li><a href="paginaOrtodoncia.html" data-translate="orthodontics">Ortodoncia</a></li>
+                            <li><a href="paginaCirugia.html" data-translate="surgery">Cirugía</a></li>
+                            <li><a href="paginaEndodoncia.html" data-translate="endodontics">Endodoncia</a></li>
+                            <li><a href="paginaEstetica.html" data-translate="aesthetics">Estética</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="encuentranos.html" data-translate="find-us">¡Encuéntranos!</a></li>
+                    <li><a href="profesionales.html" data-translate="our-professionals">Nuestros Profesionales</a></li>
+                    <li><a href="blog.html" data-translate="blog">Blog</a></li>
+                    <li><a href="financiacion.html" data-translate="financing">Financiación</a></li>
+                    <li><a href="login.html" data-translate="login">Login</a></li>
+                </ul>
+            </div>
+            <div class="nav-buttons">
+                <button class="language-button" onclick="toggleLanguage()">
+                    <span id="languageText">EN</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="header-container">
+            <h1 data-translate="appointments-calendar">Calendario de citas</h1>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color legend-green"></div>
+                    <span data-translate="available">Disponible</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-red"></div>
+                    <span data-translate="occupied">Ocupado</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="calendar-container">
+            <table class="calendar">
+                <thead>
+                    <tr>
+                        <th data-translate="monday">LUNES</th>
+                        <th data-translate="tuesday">MARTES</th>
+                        <th data-translate="wednesday">MIÉRCOLES</th>
+                        <th data-translate="thursday">JUEVES</th>
+                        <th data-translate="friday">VIERNES</th>
+                        <th data-translate="saturday">SÁBADO</th>
+                        <th data-translate="sunday">DOMINGO</th>
+                    </tr>
+                </thead>
+                <tbody id="calendar-body">
+                </tbody>
+            </table>
+        </div>
+
+        <h2 data-translate="request-appointments">¡Pedir citas!</h2>
+        <div class="appointment-options">
+            <div class="option">
+                <img src="images/urgencias-icon.png" alt="Urgencias">
+                <p data-translate="emergencies">Urgencias</p>
+            </div>
+            <div class="option">
+                <img src="images/consulta-icon.png" alt="Consulta">
+                <p data-translate="consultation">Consulta</p>
+            </div>
+            <div class="option">
+                <button class="arrow-button">
+                    <span class="arrow"></span>
+                </button>
+                <p data-translate="treatment-follow-up">Seguimiento tratamiento</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Innova-Dent">
+            </div>
+            <div class="footer-info">
+                <div class="contact-info">
+                    <h2 data-translate="clinic-name">CLÍNICA DENTAL BERJA</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <img src="images/location-icon.png" alt="Ubicación">
+                            <span data-translate="address">C/ Agua Nº31 Bajo B</span>
+                        </div>
+                        <div class="contact-item">
+                            <img src="images/phone-icon.png" alt="Teléfono">
+                            <span>+34 636 34 91 59</span>
+                        </div>
+                        <div class="contact-item">
+                            <img src="images/email-icon.png" alt="Email">
+                            <span>innovadentberja@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-media">
+                    <a href="#"><img src="images/whatsapp-icon.png" alt="WhatsApp" class="whatsapp"></a>
+                    <img src="images/instagram-icon.png" alt="Instagram">
+                    <a href="#"><img src="images/facebook-icon.png" alt="Facebook" class="facebook"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/carousel.js"></script>
+    <script>
+        // Cargar días marcados al iniciar
+        window.onload = function() {
+            const markedDays = JSON.parse(localStorage.getItem('markedDays') || '{}');
+            const cells = document.querySelectorAll('.calendar td');
+            cells.forEach(cell => {
+                const day = cell.textContent;
+                if (markedDays[day]) {
+                    cell.classList.add(markedDays[day]);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

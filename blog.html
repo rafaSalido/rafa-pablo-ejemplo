@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="blog-title">Nuestro Blog - Innova-Dent</title>
+    <link rel="stylesheet" href="css/blog.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="images/logo.png" alt="Innova-Dent Logo"></a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="conocenos.html" data-translate="about">¡Conócenos!</a></li>
+                    <li><a href="citas.html" data-translate="appointments">Citas</a></li>
+                    <li>
+                        <a href="tratamientos.html" class="dropdown-toggle" data-translate="treatments">Tratamientos</a>
+                        <ul class="dropdown">
+                            <li><a href="paginaOdontologia.html" data-translate="general-dentistry">Odontología general</a></li>
+                            <li><a href="paginaOrtodoncia.html" data-translate="orthodontics">Ortodoncia</a></li>
+                            <li><a href="paginaCirugia.html" data-translate="surgery">Cirugía</a></li>
+                            <li><a href="paginaEndodoncia.html" data-translate="endodontics">Endodoncia</a></li>
+                            <li><a href="paginaEstetica.html" data-translate="aesthetics">Estética</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="encuentranos.html" data-translate="find-us">¡Encuéntranos!</a></li>
+                    <li><a href="profesionales.html" data-translate="our-professionals">Nuestros Profesionales</a></li>
+                    <li><a href="blog.html" data-translate="blog">Blog</a></li>
+                    <li><a href="financiacion.html" data-translate="financing">Financiación</a></li>
+                    <li><a href="login.html" data-translate="login">Login</a></li>
+                </ul>
+            </div>
+            <div class="nav-buttons">
+                <button class="language-button" onclick="toggleLanguage()">
+                    <span id="languageText">EN</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <header>
+            <h1 style="text-align: center;" data-translate="our-blog">NUESTRO BLOG</h1>
+            <img src="images/blog.png" alt="Imagen de fondo" class="header-image" style="display: block; width: 100%; max-width: 900px; height: auto; margin: auto;">
+        </header>
+    
+        <div class="blog-container" style="display: flex; flex-direction: column; align-items: center;">
+            <div class="blog-post" style="display: flex; align-items: center; justify-content: center; margin: 20px 0; max-width: 900px; position: relative;">
+                <img src="images/noticia1.jpg" alt="Imagen del Post 1" style="width: 150px; height: auto; margin-right: 20px;">
+                <div style="flex-grow: 1;">
+                    <h2 style="text-align: left;" data-translate="dental-care-children">Cuidados dentales en niños</h2>
+                    <p style="text-align: left;" data-translate="dental-care-children-desc">Consejos prácticos para mantener una buena higiene dental en los más pequeños.</p>
+                    <a href="entrada.html?id=1" class="btn" style="position: absolute; bottom: 10px; right: 10px;" data-translate="see-more">Ver más</a>
+                </div>
+            </div>
+    
+            <div class="blog-post" style="display: flex; align-items: center; justify-content: center; margin: 20px 0; max-width: 900px; position: relative;">
+                <img src="images/noticia2.jpg" alt="Imagen del Post 2" style="width: 150px; height: auto; margin-right: 20px;">
+                <div style="flex-grow: 1;">
+                    <h2 style="text-align: left;" data-translate="invisible-ortho-benefits">Beneficios de la ortodoncia invisible</h2>
+                    <p style="text-align: left;" data-translate="invisible-ortho-desc">Descubre las ventajas de este tratamiento moderno y discreto.</p>
+                    <a href="entrada.html?id=2" class="btn" style="position: absolute; bottom: 10px; right: 10px;" data-translate="see-more">Ver más</a>
+                </div>
+            </div>
+    
+            <div class="blog-post" style="display: flex; align-items: center; justify-content: center; margin: 20px 0; max-width: 900px; position: relative;">
+                <img src="images/noticia3.jpg" alt="Imagen del Post 3" style="width: 150px; height: auto; margin-right: 20px;">
+                <div style="flex-grow: 1;">
+                    <h2 style="text-align: left;" data-translate="regular-checkups">Importancia de las revisiones periódicas</h2>
+                    <p style="text-align: left;" data-translate="regular-checkups-desc">Por qué es crucial mantener las visitas regulares al dentista.</p>
+                    <a href="entrada.html?id=3" class="btn" style="position: absolute; bottom: 10px; right: 10px;" data-translate="see-more">Ver más</a>
+                </div>
+            </div>
+
+            <div id="entradas-dinamicas"></div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Innova-Dent">
+            </div>
+            <div class="footer-info">
+                <div class="contact-info">
+                    <h2 data-translate="clinic-name">CLÍNICA DENTAL BERJA</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <img src="images/location-icon.png" alt="Ubicación">
+                            <span data-translate="address">C/ Agua Nº31 Bajo B</span>
+                        </div>
+                        <div class="contact-item">
+                            <img src="images/phone-icon.png" alt="Teléfono">
+                            <span>+34 636 34 91 59</span>
+                        </div>
+                        <div class="contact-item">
+                            <img src="images/email-icon.png" alt="Email">
+                            <span>innovadentberja@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-media">
+                    <a href="#"><img src="images/whatsapp-icon.png" alt="WhatsApp" class="whatsapp"></a>
+                    <img src="images/instagram-icon.png" alt="Instagram">
+                    <a href="#"><img src="images/facebook-icon.png" alt="Facebook" class="facebook"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="blog-container" style="display: flex; flex-direction: column; align-items: center;">
+        <div id="entradas-dinamicas"></div>
+    </div>
+    
+    <script>
+        // Cargar entradas del blog
+        function cargarEntradas() {
+            const contenedor = document.getElementById('entradas-dinamicas');
+            const entradas = JSON.parse(localStorage.getItem('blogEntradas') || '[]');
+            
+            contenedor.innerHTML = ''; // Limpiar el contenedor antes de añadir nuevas entradas
+            
+            entradas.forEach(entrada => {
+                const entradaHTML = `
+                     <div class="blog-post" style="
+                        display: flex; 
+                        align-items: center; 
+                        justify-content: center; 
+                        margin: 20px 0; 
+                        width: 900px;
+                        height: 140px;
+                        background-color: #ffa500; 
+                        padding: 20px; 
+                        border-radius: 10px;
+                        box-sizing: border-box;
+                    ">
+                        <img src="${entrada.imagen}" alt="${entrada.titulo}" style="
+                            width: 150px; 
+                            height: 120px; 
+                            margin-right: 20px; 
+                            object-fit: cover;
+                        ">
+                        <div style="
+                            flex-grow: 1; 
+                            position: relative;
+                            height: 100%;
+                        ">
+                            <h2 style="
+                                text-align: left; 
+                                font-size: 24px; 
+                                margin-bottom: 10px;
+                                color: white;
+                            ">${entrada.titulo}</h2>
+                            <p style="
+                                text-align: left; 
+                                font-size: 16px;
+                                color: white;
+                            ">${entrada.contenido.substring(0, 100)}...</p>
+                            <a href="entrada.html?id=${entrada.id}" class="btn" style="
+                                position: absolute; 
+                                bottom: 0; 
+                                right: 0; 
+                                background-color: #9B59B6; 
+                                color: white; 
+                                padding: 8px 15px; 
+                                text-decoration: none; 
+                                border-radius: 5px;
+                            ">Ver más</a>
+                        </div>
+                    </div>
+                `;
+                contenedor.innerHTML += entradaHTML;
+            });
+
+            // Actualizar las traducciones después de cargar el contenido dinámico
+            if (typeof updateTranslations === 'function') {
+                updateTranslations();
+            }
+        }
+    
+        // Cargar entradas cuando la página se cargue
+        window.onload = cargarEntradas;
+    </script>
+
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/carousel.js"></script>
+</body>
+
+</html>

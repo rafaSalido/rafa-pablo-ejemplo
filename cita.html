@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Cita - Innova-Dent</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            background-color: #FFB380;
+            padding: 10px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            margin-left: 20px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: black;
+            padding: 15px 25px;
+            font-weight: bold;
+        }
+
+        .nav-buttons a.active {
+            background-color: #FF9F55;
+        }
+
+        .user-section {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logout-button {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .main-content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .cita-details {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 20px;
+            line-height: 2;
+        }
+
+        .cita-details > div:nth-child(odd) {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Innova-Dent Logo">
+            </a>
+        </div>
+        <div class="nav-buttons">
+            <a href="Perfil.html">Perfil</a>
+            <a href="mis pruebas.html">Mis pruebas</a>
+            <a href="mis tratamientos.html">Mis tratamientos</a>
+            <a href="mis citas.html" class="active">Mis citas</a>
+        </div>
+        <div class="user-section">
+            <img src="images/profile-pic.jpg" alt="Foto de perfil" class="profile-pic">
+            <a href="#" onclick="logout()" class="logout-button">Cerrar sesión</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1>Cita 22/09/2024 Férulas</h1>
+        
+        <div class="cita-details">
+            <div>Descripción:</div>
+            <div>texto descriptivo.</div>
+
+            <div>Importe:</div>
+            <div>30 €</div>
+
+            <div>Financiación:</div>
+            <div>Sí</div>
+
+            <div>Tratamiento:</div>
+            <div>Férulas</div>
+
+            <div>Restante a pagar:</div>
+            <div>12 €</div>
+
+            <div>Comentarios:</div>
+            <div>Comentarios de la dentista.</div>
+        </div>
+    </main>
+
+    <script>
+        window.onload = function() {
+            // Obtener el ID de la cita de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const citaId = parseInt(urlParams.get('id'));
+
+            // Obtener todas las citas del localStorage
+            const citas = JSON.parse(localStorage.getItem('citas') || '[]');
+            const cita = citas.find(c => c.id === citaId);
+
+            // Actualizar el contenido de la página
+            if (cita) {
+                document.querySelector('h1').textContent = `Cita ${cita.dia} ${cita.tratamiento}`;
+                
+                // Actualizar los detalles de la cita
+                const detalles = document.querySelector('.cita-details');
+                detalles.innerHTML = `
+                    <div>Descripción:</div>
+                    <div>Cita para ${cita.tratamiento}</div>
+
+                    <div>Fecha:</div>
+                    <div>${cita.dia}</div>
+
+                    <div>Hora:</div>
+                    <div>${cita.hora}</div>
+
+                    <div>Estado:</div>
+                    <div>${cita.estado}</div>
+
+                    <div>Cliente:</div>
+                    <div>${cita.clienteEmail}</div>
+
+                    <div>Tratamiento:</div>
+                    <div>${cita.tratamiento}</div>
+                `;
+            }
+
+            // Cargar la foto de perfil
+            const datosGuardados = localStorage.getItem('perfilUsuario');
+            if (datosGuardados) {
+                const datos = JSON.parse(datosGuardados);
+                if (datos.fotoPerfil) {
+                    const profileImages = document.querySelectorAll('.profile-pic');
+                    profileImages.forEach(img => {
+                        img.src = datos.fotoPerfil;
+                    });
+                }
+            }
+        }
+
+        // Función para cerrar sesión
+        function logout() {
+            localStorage.removeItem('usuarioActual');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

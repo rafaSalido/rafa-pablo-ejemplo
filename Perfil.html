@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Innova-Dent</title>
+    <style>
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            background-color: #FFB380;
+            padding: 10px 20px;
+            height: 80px;
+        }
+
+        .logo img {
+            height: 80px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+            margin-left: 40px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: black;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+
+        .nav-buttons a.active {
+            background-color: #FF9F55;
+        }
+
+        .user-section {
+            display: flex;
+            margin-left: auto;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile-pic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logout-button {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .profile-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-photo {
+            width: 300px;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .edit-button {
+            background-color: #B667F1;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Innova-Dent Logo">
+            </a>
+        </div>
+        <div class="nav-buttons">
+            <a href="Perfil.html">Perfil</a>
+            <a href="mis pruebas.html">Mis pruebas</a>
+            <a href="mis tratamientos.html">Mis tratamientos</a>
+            <a href="mis citas.html">Mis citas</a>
+        </div>
+        <div class="user-section">
+            <img src="images/profile-pic.jpg" alt="Foto de perfil" class="profile-pic">
+            <a href="#" onclick="logout()" class="logout-button">Cerrar sesión</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1>PERFIL</h1>
+        
+        <div class="profile-container">
+            <div class="profile-info">
+                <h2>Nombre y apellidos</h2>
+                <p id="nombreCompleto">-</p>
+
+                <h2>Edad</h2>
+                <p id="edadPerfil">-</p>
+
+                <h2>Localidad</h2>
+                <p id="localidadPerfil">-</p>
+
+                <button class="edit-button" onclick="window.location.href='editar perfil.html'">Editar perfil</button>
+            </div>
+            
+            <img src="images/profile-pic.jpg" alt="Foto de perfil" class="profile-photo" id="profileImage">
+        </div>
+    </main>
+
+    <script>
+        window.onload = function() {
+            const datosGuardados = localStorage.getItem('perfilUsuario');
+            if (datosGuardados) {
+                const datos = JSON.parse(datosGuardados);
+                
+                // Actualizar nombre y apellido
+                document.getElementById('nombreCompleto').textContent = 
+                    `${datos.nombre} ${datos.primerApellido}`.trim();
+                document.getElementById('edadPerfil').textContent = datos.edad || '-';
+                document.getElementById('localidadPerfil').textContent = datos.localidad || '-';
+
+                // Actualizar todas las fotos de perfil si existe una nueva
+                if (datos.fotoPerfil) {
+                    const profileImages = document.querySelectorAll('.profile-pic, .profile-photo');
+                    profileImages.forEach(img => {
+                        img.src = datos.fotoPerfil;
+                    });
+                }
+            }
+        }
+
+        // Función para cerrar sesión
+        function logout() {
+            localStorage.removeItem('usuarioActual');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+
+</html>

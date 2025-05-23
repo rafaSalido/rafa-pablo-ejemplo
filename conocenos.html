@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="about-title">¡Conócenos! - Innova-Dent</title>
+    <link rel="stylesheet" href="css/conocenos.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="images/logo.png" alt="Innova-Dent Logo"></a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="conocenos.html">¡Conócenos!</a></li>
+                    <li><a href="citas.html">Citas</a></li>
+                    <li>
+                        <a href="tratamientos.html" class="dropdown-toggle">Tratamientos</a>
+                        <ul class="dropdown">
+                            <li><a href="paginaOdontologia.html">Odontología general</a></li>
+                            <li><a href="paginaOrtodoncia.html">Ortodoncia</a></li>
+                            <li><a href="paginaCirugia.html">Cirugía</a></li>
+                            <li><a href="paginaEndodoncia.html">Endodoncia</a></li>
+                            <li><a href="paginaEstetica.html">Estética</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="encuentranos.html">¡Encuéntranos!</a></li>
+                    <li><a href="profesionales.html">Nuestros Profesionales</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="financiacion.html">Financiación</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </div>
+            <div class="nav-buttons">
+                <button class="language-button" onclick="toggleLanguage()">
+                    
+                    <span id="languageText">EN</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+        <h1 style="text-align: center" data-translate="our-history">¡Nuestra historia!</h1>
+        
+        <!-- Contenedor para la información editable -->
+        <div id="informacionContenido">
+            <!-- Contenido por defecto si no hay nada guardado -->
+            <p data-translate="history-p1">
+                Fundada el 18 de octubre de 2005, Innova-Dent ha sido sinónimo de excelencia y
+                compromiso con la salud bucodental de nuestra comunidad...
+            </p>
+            
+            <p data-translate="history-p2">
+                A lo largo de los años, hemos evolucionado constantemente...
+            </p>
+
+            <p data-translate="history-p3">
+                ¡En Innova-Dent, cuidamos de cada sonrisa como si fuera única!
+            </p>
+        </div>
+
+        <h2 data-translate="video">¡Vídeo!</h2>
+        <div class="video-container" id="videoContainer">
+            <video controls width="640" height="360" poster="images/video-placeholder.jpg">
+                <source src="videos/video-dentista.mp4" type="video/mp4">
+                <source src="videos/video-dentista.webm" type="video/webm">
+                Tu navegador no soporta videos. Por favor, actualiza tu navegador para ver el contenido.
+            </video>
+        </div>
+
+        <h2 data-translate="our-professionals">¡Nuestros Profesionales!</h2>
+        <div class="profesionales-container">
+            <div class="profesionales-wrapper">
+                <div class="profesionales-grid">
+                    <div class="profesional-card">
+                        <img src="images/yolanda.png" alt="Yolanda">
+                        <h3>Yolanda Barrionuevo Martín</h3>
+                    </div>
+                    <div class="profesional-card">
+                        <img src="images/jose.png" alt="Jose">
+                        <h3>Jose Manuel Salas Pérez</h3>
+                    </div>
+                    <div class="profesional-card">
+                        <img src="images/maria.png" alt="María">
+                        <h3>Mª del Mar Alférez Molina</h3>
+                    </div>
+                </div>
+                <a href="profesionales.html" class="mas-profesionales" data-translate="more-professionals">Más profesionales</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Innova-Dent">
+            </div>
+            <div class="footer-info">
+                <div class="contact-info">
+                    <h2>CLÍNICA DENTAL BERJA</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <img src="images/location-icon.png" alt="Ubicación">
+                            <span>C/ Agua Nº31 Bajo B</span>
+                        </div>
+                        <div class="contact-item">
+                            <img src="images/phone-icon.png" alt="Teléfono">
+                            <span>+34 636 34 91 59</span>
+                        </div>
+                        <div class="contact-item">
+                            <img src="images/email-icon.png" alt="Email">
+                            <span>innovadentberja@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-media">
+                    <a href="#"><img src="images/whatsapp-icon.png" alt="WhatsApp" class="whatsapp"></a>
+                    <img src="images/instagram-icon.png" alt="Instagram">
+                    <a href="#"><img src="images/facebook-icon.png" alt="Facebook" class="facebook"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Font Awesome para iconos -->
+    <script src="https://kit.fontawesome.com/tu-codigo.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/carousel.js"></script>
+    <script>
+        // Función para cargar el contenido guardado
+        window.onload = function() {
+            // Cargar información
+            const informacionGuardada = localStorage.getItem('conocenosInfo');
+            if (informacionGuardada) {
+                document.getElementById('informacionContenido').innerHTML = informacionGuardada;
+            }
+
+            // Cargar video
+            const videoUrlGuardada = localStorage.getItem('conocenosVideo');
+            if (videoUrlGuardada) {
+                const videoContainer = document.getElementById('videoContainer');
+                videoContainer.innerHTML = `
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        src="${videoUrlGuardada}" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                `;
+            }
+        };
+    </script>
+    </body>
+    <script src="js/translations.js"></script>
+<script src="js/main.js"></script>
+    </html>
